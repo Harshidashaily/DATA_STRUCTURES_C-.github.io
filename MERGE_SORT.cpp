@@ -61,7 +61,13 @@ int main   ()
         cout<<arr[i]<<"   ";
     }
     cout<<"]"<<endl;
-
+    MERGE_SORT(arr,0,size-1);
+    cout<<"The Elements After Sorting In The Array Is As Follows=[   ";
+    for   (int i=0;i<size;i++)
+    {
+        cout<<arr[i]<<"   ";
+    }
+    cout<<"]"<<endl;
     return 0;
     getchar();
 }
