@@ -4,13 +4,13 @@ class Node
 {
     public:
     int data;
-    Node* previous;
     Node* next;
+    Node* previous;
     Node(int data)
     {
         this->data=data;
-        this->previous=NULL;
         this->next=NULL;
+        this->previous=NULL;
     }
     ~Node()
     {
@@ -19,24 +19,24 @@ class Node
         {
             this->next=NULL;
             this->previous=NULL;
-            delete previous;
             delete next;
+            delete previous;
         }
-        cout<<"The Data In The Deleted Node Is="<<value<<endl;
+        cout<<"The Data Of The Deleted Node Is="<<value<<endl;
     }
 };
 void InsertAtHead(Node* &head,int da)
 {
-    Node* newNode=new Node(da);
-    newNode->next=head;
-    head->previous=newNode;
-    head=newNode;
+     Node* newNode=new Node(da);
+     newNode->next=head;
+     head->previous=newNode;
+     head=newNode;
 }
 void InsertAtTail(Node* &tail,int da)
 {
     Node* newNode=new Node(da);
-    newNode->previous=tail;
     tail->next=newNode;
+    newNode->previous=tail;
     tail=tail->next;
 }
 void InsertAtMiddle(Node* &tail,Node* &head,int position,int da)
@@ -46,18 +46,21 @@ void InsertAtMiddle(Node* &tail,Node* &head,int position,int da)
         InsertAtHead(head,da);
         return;
     }
-    Node* temp=head;
-    int count=0;
-    while   (count<position-1)
+    else 
     {
-        temp=temp->next;
-        count++;
+        Node* temp=head;
+        int count=0;
+        while   (count<position-1)
+        {
+            temp=temp->next;
+            count++;
+        }
+        Node* newNode=new Node(da);
+        newNode->next=temp->next;
+        temp->next->previous=newNode;
+        newNode->previous=temp;
+        temp->next=newNode;
     }
-    Node* newNode=new Node(da);
-    newNode->next=temp->next;
-    temp->next->previous=newNode;
-    newNode->previous=temp;
-    temp->next=newNode;
 }
 void Delete(Node* &head,Node* &tail,int position)
 {
@@ -120,21 +123,21 @@ int main   ()
     Node* node1=new Node(10);
     Node* head=node1;
     Node* tail=node1;
+    InsertAtHead(head,11);
     InsertAtHead(head,12);
-    InsertAtHead(head,14);
-    InsertAtMiddle(tail,head,3,16);
-    InsertAtTail(tail,18);
+    InsertAtTail(tail,14);
+    InsertAtMiddle(tail,head,3,13);
     cout<<"The Elements In The Original Linked-List Are=[   ";
     Print(head);
     cout<<"]"<<endl;
-    cout<<"The Elements In The Original Reversed Linked-List Are=[   ";
+    cout<<"The Elements In The Reversed Original Linked-List Are=[   ";
     PrintReverse(tail);
     cout<<"]"<<endl;
     Delete(head,tail,3);
-    cout<<"The Elements After Deletion In The Linked-List Are=[   ";
+    cout<<"The Elements After Deletion In The Original Linked-List Are=[   ";
     Print(head);
     cout<<"]"<<endl;
-    cout<<"The Elements After Deletion In The Reversed Linked-List Are=[   ";
+    cout<<"The Elements After Deletion In The Reversed Original Linked-List Are=[   ";
     PrintReverse(tail);
     cout<<"]"<<endl;
     return 0;
